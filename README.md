@@ -18,7 +18,7 @@ go build
 
 Then navigate to http://localhost:2000
 
-## Javascript API (frontend)
+## JavaScript API (frontend)
 
 Connecting to the backend:
 
