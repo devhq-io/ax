@@ -1,0 +1,62 @@
+#!/usr/bin/env python
+
+import os
+import sys
+import optparse
+import distutils.dir_util
+
+def usage():
+    print('Ax toolkit project creation tool\n')
+    print('Usage:\n\tax [-n <project_name>] <path_to_project>')
+    print('\n<path_to_project> must be an existing path')
+
+def rename_main_file(dstdir, fname):
+    fn = fname
+    if len(fn) < 3:
+        fn += '.go'
+    else:
+        e = fn[len(fn)-3:]
+        if e != '.go':
+            fn += '.go'
+    fromname = os.path.join(dstdir, 'main.go')
+    toname = os.path.join(dstdir, fn)
+    try:
+        os.rename(fromname, toname)
+    except:
+        print('Error while renaming file: ' + sys.exc_info()[0])
+        sys.exit(6)
+
+def main():
+    p = optparse.OptionParser()
+    p.add_option('-n', '--name', dest='project_name')
+    (opts, args) = p.parse_args()
+    if len(args) < 1:
+        usage()
+        sys.exit(2)
+    dstdir = args[0]
+    try:
+        dstdir = os.path.realpath(dstdir)
+    except:
+        print('Error: invalid path "%s"' % dstdir)
+        sys.exit(3)
+    if os.path.isdir(dstdir) and os.listdir(dstdir) != []:
+        print('Error: directory "%s" is not empty' % dstdir)
+        sys.exit(4)
+    srcdir = os.path.split(__file__)[0]
+    try:
+        distutils.dir_util.copy_tree(os.path.join(srcdir, 'skeleton'), dstdir)
+    except:
+        print('Error while copying the project files: ', sys.exc_info()[0])
+        sys.exit(5)
+    if opts.project_name != None:
+        rename_main_file(dstdir, opts.project_name)
+    print('Ax project has been created in "%s" directory' % dstdir)
+    print('Execute\n\t$ go build\nin this directory to build the project')
+    print('Then type\n\t$ ./%s\nto start' %
+                                os.path.split(os.path.normpath(dstdir))[1])
+    sys.exit(0)
+
+if __name__ != '__main__':
+    usage()
+    sys.exit(1)
+main()
