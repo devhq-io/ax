@@ -15,7 +15,6 @@ import (
 )
 
 type Config struct {
-	Port int
 	UseTls bool
 	ConnectionTimeout int
 }
@@ -102,9 +101,9 @@ func makeCookie(cid string) *http.Cookie {
 	return cookie
 }
 
-func makeInitScript(cid string, host string, port int, usetls bool, connectionTimeout int) string {
-	return fmt.Sprintf("var __state = {cid:'%s',conn_timeout:%d,host:'%s',port:%d,secure:%v};\n",
-			   cid, connectionTimeout, host, port, usetls)
+func makeInitScript(cid string, host string, usetls bool, connectionTimeout int) string {
+	return fmt.Sprintf("var __state = {cid:'%s',conn_timeout:%d,host:'%s',secure:%v};\n",
+			   cid, connectionTimeout, host, usetls)
 }
 
 func getHostFromRequest(r *http.Request) string {
@@ -125,7 +124,7 @@ func axInitHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Set("Content-Type", "text/javascript")
 	script := makeInitScript(cid, getHostFromRequest(r),
-				 config.Port, config.UseTls, config.ConnectionTimeout)
+				 config.UseTls, config.ConnectionTimeout)
 	fmt.Fprintf(w, "%s", script)
 }
 

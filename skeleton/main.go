@@ -75,7 +75,7 @@ func main() {
 	port := 2000
 	setupLogger("stdout")
 	startGcLoop(1000)
-	c := &ax.Config{Port: port, ConnectionTimeout: 300}
+	c := &ax.Config{UseTls:false, ConnectionTimeout: 300}
 	r := ax.Setup(c)
 	setupRoutes(r)
 	setMessageHandlers()
