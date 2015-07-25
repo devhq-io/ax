@@ -34,7 +34,7 @@ var ax = (function() {
             return;
         }
         var prefix = state['secure'] ? 'wss://' : 'ws://';
-        var path = prefix + state['host'] + ':' + state['port'] + '/__ws';
+        var path = prefix + state['host'] + ':' + window.location.port + '/__ws';
         if (ws) {
             ws.onclose = function () {};
             ws.close();
