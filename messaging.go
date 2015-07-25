@@ -20,7 +20,7 @@ var (
 	rawHandler RawMessageHandler
 )
 
-func JsonSend(c *Client, msgtype string, arg interface{}) error {
+func (c *Client) JsonSend(msgtype string, arg interface{}) error {
 	msg := &JsonClientMessage {
 		MsgType: msgtype,
 		Data: arg,

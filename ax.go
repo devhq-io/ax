@@ -187,7 +187,7 @@ func recvLoop(c *Client) {
 		if r := recover(); r != nil {
 			log.Printf("[%v]recvLoop panic: %v\n", c.cid, r)
 		}
-		if c.Shutdown() == nil && onleave != nil {
+		if c.Disconnect() == nil && onleave != nil {
 			onleave(c)
 		}
 	}()
@@ -287,7 +287,7 @@ func (c *Client) Send(data []byte) error {
 	return nil
 }
 
-func (c *Client) Shutdown() error {
+func (c *Client) Disconnect() error {
 	if c.isDisconnected() {
 		return ErrDisconnected
 	}

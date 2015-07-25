@@ -25,7 +25,7 @@ var ax = (function() {
         document.cookie = name + "=" + value + expires + "; path=/";
     }
 
-    function connect(init_handler) {
+    function connect(connect_ok_handler) {
         if (window.MozWebSocket != undefined)
             window.WebSocket = window.MozWebSocket;
         if (window.WebSocket === undefined) {
@@ -70,8 +70,8 @@ var ax = (function() {
         };
         ws.onopen = function () {
             connected = true;
-            if (init_handler)
-                init_handler();
+            if (connect_ok_handler)
+                connect_ok_handler();
         };
         ws.onerror = function (e) {
             if (error_handler)

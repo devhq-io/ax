@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/hacktunnel/ax"
 	"time"
 	"os"
 	"io/ioutil"
@@ -10,6 +9,8 @@ import (
 	"log"
 	"runtime/debug"
 	"net/http"
+
+	"github.com/devhq-io/ax"
 	)
 
 func setupLogger(which string) {
@@ -66,7 +67,7 @@ func setMessageHandlers() {
 			}
 			value += 1
 			log.Printf("request message: '%+v'\n", data)
-			ax.JsonSend(c, "answer", &answerArgs{Value: value})
+			c.JsonSend("answer", &answerArgs{Value: value})
 		})
 }
 
