@@ -2,7 +2,7 @@
 
 Ax is a lightweight Go web toolkit for creating single page applications. It is built on the top of Gorilla Websocket library. The design is focused on simplicity and performance.
 
-This is not a web framework. This is a utilitarian tool to solve practical problems. There are no roitung, templates, rendering, databases etc. Only a websocket connection between frontend and backend for message passing.
+This is not a web framework. This is a utilitarian tool to solve practical problems. There are no routing, templates, rendering, databases etc. Only a websocket connection between frontend and backend for message passing.
 
 
 ## Quick start:
