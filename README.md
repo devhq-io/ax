@@ -1,8 +1,8 @@
 # ax
 
-Ax is a lightweight Go web toolkit for creating single page applications. It is built on the top of Gorilla Websocket library. The design is focused on simplicity and performance.
+Ax is a lightweight Go web toolkit for creating single page applications. It is built on the top of Gorilla WebSocket library. The design is focused on simplicity and performance.
 
-This is not a web framework. This is a utilitarian tool to solve practical problems. There are no routing, templates, rendering, databases etc. Only a websocket connection between frontend and backend for message passing.
+This is not a web framework. This is a utilitarian tool to solve practical problems. There are no routing, templates, rendering, databases etc. Only a WebSocket connection between frontend and backend for message passing.
 
 
 ## Quick start:
@@ -84,7 +84,7 @@ ax.OnLeave(func(c *ax.Client) {
 })
 ```
 
-The client has a continuous WebSocket connection with the server until OnLeave
+The client has a continuous WebSocket connection with the server. When it is closed at the client, OnLeave
 callback is called.
 
 The client has an unique connection ID string. It can be obtained as follows:
